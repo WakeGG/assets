@@ -90,9 +90,7 @@
   display: block;
   font-size: 13px;
   line-height: 1.4;
-  transform: translateX(50px);
-  opacity: 0;
-  transition: opacity 0.3s ease, transform 0.7s ease;
+  
 }
 .swiper-slide .content .caption.show {
   transform: translateX(0);
