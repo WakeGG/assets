@@ -75,11 +75,11 @@
   display: none;
 }
 .swiper-slide .content {
-  position: absolute;
-  top: 40%;
-  left: 0;
-  width: 50%;
-  padding-left: 5%;
+position: absolute;
+margin: 20px;
+border-radius: 4px;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.486);
   color: #fff;
 }
 .swiper-slide .content .title {
