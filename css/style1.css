@@ -32,10 +32,10 @@
 .swiper-container.nav-slider .swiper-slide.swiper-slide-active {
   opacity: 1;
 }
-.swiper-container.nav-slider .swiper-slide .content {
+.swiper-container.nav-slider .swiper-slide .content1 {
   width: 100%;
 }
-.swiper-container.nav-slider .swiper-slide .content .title {
+.swiper-container.nav-slider .swiper-slide .content1 .title {
   font-size: 20px;
 }
 .swiper-container:hover .swiper-button-prev,
