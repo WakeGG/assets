@@ -14,7 +14,7 @@
 }
 
 .swiper-container {
-
+  background-color: rgba(0, 0, 0, 0.486);
   width: 80%;
   height: 100vh;
   float: left;
