@@ -63,7 +63,7 @@ let mainSlider = new Swiper(mainSliderSelector, mainSliderOptions);
 // Navigation Slider
 let navSliderOptions = {
       loop: true,
-      loopAdditionalSlides: 0,
+      loopAdditionalSlides: 3,
       speed:1000,
       spaceBetween: 5,
       slidesPerView: 5,
