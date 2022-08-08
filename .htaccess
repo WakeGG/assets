@@ -1,1 +1,2 @@
-dwdwd
+RewriteEngine On
+RewriteRule ^re1(|/)$ /re.php
