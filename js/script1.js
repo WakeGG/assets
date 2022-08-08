@@ -58,7 +58,7 @@ let mainSliderOptions = {
         }
       }
     };
-let mainSlider = new Swiper(mainSliderSelector, mainSliderOptions);
+let mainSlider1 = new Swiper(mainSliderSelector, mainSliderOptions);
 
 // Navigation Slider
 let navSliderOptions = {
@@ -76,11 +76,11 @@ let navSliderOptions = {
           this.el.classList.remove('loading');
         },
         click: function(){
-          mainSlider.autoplay.stop();
+          mainSlider1.autoplay.stop();
         }
       }
     };
 let navSlider = new Swiper(navSliderSelector, navSliderOptions);
 
-mainSlider.controller.control = navSlider;
-navSlider.controller.control = mainSlider;
+mainSlider1.controller.control = navSlider;
+navSlider.controller.control = mainSlider1;
