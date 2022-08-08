@@ -1,4 +1,4 @@
-let mainSlider1Selector = '.main-slider1',
+let mainSlider1Selector = '.1main-slider1',
     navSliderSelector = '.nav-slider',
     interleaveOffset = 0.8;
 
