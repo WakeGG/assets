@@ -1,4 +1,4 @@
-let mainSlider1Selector = '.1main-slider1',
+let mainSliderSelector = '.main-slider',
     navSliderSelector = '.nav-slider',
     interleaveOffset = 0.8;
 
@@ -58,7 +58,7 @@ let mainSliderOptions = {
         }
       }
     };
-let mainSlider1 = new Swiper(mainSlider1Selector, mainSliderOptions);
+let mainSlider = new Swiper(mainSliderSelector, mainSliderOptions);
 
 // Navigation Slider
 let navSliderOptions = {
@@ -76,11 +76,11 @@ let navSliderOptions = {
           this.el.classList.remove('loading');
         },
         click: function(){
-          mainSlider1.autoplay.stop();
+          mainSlider.autoplay.stop();
         }
       }
     };
-let navSlider = new Swiper(navSlider1Selector, navSliderOptions);
+let navSlider = new Swiper(navSliderSelector, navSliderOptions);
 
-mainSlider1.controller.control = navSlider;
-navSlider.controller.control = mainSlider1;
+mainSlider.controller.control = navSlider;
+navSlider.controller.control = mainSlider;
