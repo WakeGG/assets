@@ -1,4 +1,4 @@
-let mainSliderSelector = '.main-slider1',
+let mainSlider1Selector = '.main-slider1',
     navSliderSelector = '.nav-slider',
     interleaveOffset = 0.8;
 
@@ -58,7 +58,7 @@ let mainSliderOptions = {
         }
       }
     };
-let mainSlider1 = new Swiper(mainSliderSelector, mainSliderOptions);
+let mainSlider1 = new Swiper(mainSlider1Selector, mainSliderOptions);
 
 // Navigation Slider
 let navSliderOptions = {
@@ -80,7 +80,7 @@ let navSliderOptions = {
         }
       }
     };
-let navSlider = new Swiper(navSliderSelector, navSliderOptions);
+let navSlider = new Swiper(navSlider1Selector, navSliderOptions);
 
 mainSlider1.controller.control = navSlider;
 navSlider.controller.control = mainSlider1;
