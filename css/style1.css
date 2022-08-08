@@ -13,7 +13,7 @@
   padding: 0;
 }
 
-.swiper-containerB {
+.swiper-container {
   width: 80%;
   height: 100vh;
   float: left;
@@ -43,7 +43,7 @@
   opacity: 1;
   visibility: visible;
 }
-.swiper-containerB.loading {
+.swiper-container.loading {
   opacity: 0;
   visibility: hidden;
 }
