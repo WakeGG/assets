@@ -19,31 +19,31 @@
   float: left;
   transition: opacity 0.6s ease, transform 0.3s ease;
 }
-.swiper-containerB.nav-slider {
+.swiper-container.nav-slider {
   width: 20%;
   padding-left: 5px;
 }
-.swiper-containerB.nav-slider .swiper-slide {
+.swiper-container.nav-slider .swiper-slide {
   cursor: pointer;
   opacity: 0.4;
   transition: opacity 0.3s ease;
 }
-.swiper-containerB.nav-slider .swiper-slide.swiper-slide-active {
+.swiper-container.nav-slider .swiper-slide.swiper-slide-active {
   opacity: 1;
 }
-.swiper-containerB.nav-slider .swiper-slide .content {
+.swiper-container.nav-slider .swiper-slide .content {
   width: 100%;
 }
-.swiper-containerB.nav-slider .swiper-slide .content .title {
+.swiper-container.nav-slider .swiper-slide .content .title {
   font-size: 20px;
 }
-.swiper-containerB:hover .swiper-button-prev,
-.swiper-containerB:hover .swiper-button-next {
+.swiper-container:hover .swiper-button-prev,
+.swiper-container:hover .swiper-button-next {
   transform: translateX(0);
   opacity: 1;
   visibility: visible;
 }
-.swiper-containerB.loading {
+.swiper-container.loading {
   opacity: 0;
   visibility: hidden;
 }
