@@ -384,13 +384,12 @@
       </div>
 <script>
 function livepreview() {
-
-var range = document.createRange();
-                    range.selectNode(document.getElementById("live-preview"));
-                    window.getSelection().removeAllRanges();
-                    window.getSelection().addRange(range);
-                    document.execCommand("copy");
-                    window.getSelection().removeAllRanges();
+var copyBoxElement = document.getElementById('live-preview');
+copyBoxElement.contenteditable = true;
+    copyBoxElement.focus();
+    document.execCommand('selectAll');
+    document.execCommand("copy");
+    copyBoxElement.contenteditable = false;
 }
   </script>
       <b>
