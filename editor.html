@@ -384,7 +384,7 @@
       </div>
 <script>
 function livepreview() {
-var copyBoxElement = document.getElementById('live-preview');
+var copyBoxElement = document.getElementById('live-preview').html();
 copyBoxElement.contenteditable = true;
     copyBoxElement.focus();
     document.execCommand('selectAll');
