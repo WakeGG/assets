@@ -203,11 +203,21 @@ Wake	( <img src="https://habblive.in/web-gallery/v2/images/icon_habbo_small.png"
 </style>
         <form id="noticia-form">
                 <br>
-                <div contenteditable="true" class="center-block" id="live-preview" style="outline: none;border:none;width:530px;text-align: left;margin-left: 0px;margin-top: 0px;">
+                <div contenteditable="true" class="center-block" id="live-preview" style="outline: none;border:none;width:530px;text-align: left;margin-left: 0px;margin-top: 0px;" lang="pt-br" dir="ltr">
                     Escreva aqui...
                 </div> 
                 <br>
             </form>
+
+            <script>
+                CKEDITOR.config.entities = false;
+                CKEDITOR.config.entities_latin = false;
+                CKEDITOR.config.entities_greek = false;
+                CKEDITOR.config.entities_additional = '';
+
+                CKEDITOR.instances['live-preview'].config.htmlEncodeOutput = false;
+                CKEDITOR.instances['live-preview'].config.entities = false;
+              </script>
 
   <div id="fb-root"></div>
 <div class="article-body">             
@@ -280,3 +290,13 @@ function avaliar_noticias(id,avaliar,eleitor,autor){$a("#avaliar_noticias").html
 <script>var editor=CKEDITOR.inline('live-preview');
 var clip=new Clipboard('.copy-btn',{text:function(trigger){return editor.getData();}});
 </script>
+
+<script>
+        CKEDITOR.config.entities = false;
+        CKEDITOR.config.entities_latin = false;
+        CKEDITOR.config.entities_greek = false;
+        CKEDITOR.config.entities_additional = '';
+  
+        CKEDITOR.instances['live-preview'].config.htmlEncodeOutput = false;
+        CKEDITOR.instances['live-preview'].config.entities = false;
+      </script>
