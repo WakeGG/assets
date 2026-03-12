@@ -84,8 +84,15 @@
         }
 
         #live-preview {
+            outline: none;
+            border: 1px solid #ccc;
+            background: #fff;
             width: 530px;
-            height: 260px;
+            min-height: 260px;
+            padding: 10px;
+            text-align: left;
+            margin-left: 0;
+            margin-top: 0;
         }
     </style>
 </head>
@@ -246,7 +253,9 @@
                             <div class="article-body">
                                 <form id="noticia-form">
                                     <br>
-                                    <textarea id="live-preview" name="noticia">Escreva aqui...</textarea>
+                                    <div id="live-preview" class="center-block" contenteditable="true" lang="pt-br" dir="ltr">
+                                        Escreva aqui...
+                                    </div>
                                     <br>
                                 </form>
 
@@ -348,29 +357,46 @@
     </script>
 
     <script src="static/js/form-builder-v3.0.js?1664493856" type="text/javascript"></script>
-    <script src="/js/ckeditor.js?1"></script>
+
+    <!-- CKEditor novo via CDN -->
+    <script src="https://cdn.ckeditor.com/4.22.1/full-all/ckeditor.js"></script>
 
     <script>
-        window.onload = function () {
-            if (typeof CKEDITOR === 'undefined') {
-                console.error('CKEDITOR não foi carregado.');
-                alert('CKEDITOR não carregou. Verifique o arquivo: js/ckeditor.js?1');
+        document.addEventListener('DOMContentLoaded', function () {
+            var campo = document.getElementById('live-preview');
+
+            if (!campo) {
+                console.error('Elemento #live-preview não encontrado.');
                 return;
             }
 
-            CKEDITOR.config.entities = false;
-            CKEDITOR.config.entities_latin = false;
-            CKEDITOR.config.entities_greek = false;
-            CKEDITOR.config.entities_additional = '';
+            if (typeof CKEDITOR === 'undefined') {
+                console.error('CKEDITOR não foi carregado.');
+                return;
+            }
 
-            CKEDITOR.replace('live-preview', {
+            CKEDITOR.disableAutoInline = true;
+
+            CKEDITOR.inline('live-preview', {
+                language: 'pt',
                 allowedContent: true,
                 extraAllowedContent: '*[*]{*}(*)',
                 removePlugins: 'elementspath',
-                resize_enabled: true,
-                height: 260
+                height: 260,
+                toolbar: [
+                    { name: 'document', items: ['Source'] },
+                    { name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'] },
+                    { name: 'editing', items: ['Find', 'Replace', '-', 'SelectAll'] },
+                    { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat'] },
+                    { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] },
+                    { name: 'links', items: ['Link', 'Unlink'] },
+                    { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar'] },
+                    { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
+                    { name: 'colors', items: ['TextColor', 'BGColor'] },
+                    { name: 'tools', items: ['Maximize'] }
+                ]
             });
-        };
+        });
     </script>
 </body>
 </html>
