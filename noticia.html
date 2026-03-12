@@ -408,5 +408,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 </script>
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(function () {
+        console.log('sourcedialog:', !!CKEDITOR.plugins.get('sourcedialog'));
+        console.log('sourcearea:', !!CKEDITOR.plugins.get('sourcearea'));
+    }, 500);
+});
+</script>
 </body>
 </html>
