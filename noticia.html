@@ -286,17 +286,19 @@ function avaliar_noticias(id,avaliar,eleitor,autor){$a("#avaliar_noticias").html
 <p class="copyright">Habblive &copy; 2015 - 2022. Não autorizamos a cópia total ou parcial deste website. <br>Habblive Hotel criado por: <b>Gustavo</b>, <b>Heitor</b> e <b>Victor</b>.</br></a></p>
 <script type="text/javascript">HabboView.run();</script><script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="static/js/form-builder-v3.0.js?1664493856" type="text/javascript"></script>
-<script src="js/ckeditor.js?1"></script>
+
 <script>var editor=CKEDITOR.inline('live-preview');
 var clip=new Clipboard('.copy-btn',{text:function(trigger){return editor.getData();}});
 </script>
 
+<script src="js/ckeditor.js?1"></script>
 <script>
-        CKEDITOR.config.entities = false;
-        CKEDITOR.config.entities_latin = false;
-        CKEDITOR.config.entities_greek = false;
-        CKEDITOR.config.entities_additional = '';
-  
-        CKEDITOR.instances['live-preview'].config.htmlEncodeOutput = false;
-        CKEDITOR.instances['live-preview'].config.entities = false;
-      </script>
+    CKEDITOR.config.entities = false;
+    CKEDITOR.config.entities_latin = false;
+    CKEDITOR.config.entities_greek = false;
+    CKEDITOR.config.entities_additional = '';
+
+    var editor = CKEDITOR.inline('live-preview');
+    editor.config.htmlEncodeOutput = false;
+    editor.config.entities = false;
+</script>
