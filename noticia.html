@@ -390,9 +390,10 @@ document.addEventListener('DOMContentLoaded', function () {
             allowedContent: true,
             extraAllowedContent: '*[*]{*}(*)',
             extraPlugins: 'sourcedialog',
+        removePlugins: 'sourcearea,elementspath',
             toolbar: [
                 { name: 'document', items: ['Source'] },
-                { name: 'clipboard', items: ['Undo', 'Redo', '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord'] },
+                { name: 'clipboard', items: ['Source', 'Undo', 'Redo', '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord'] },
                 { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat'] },
                 { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight'] },
                 { name: 'links', items: ['Link', 'Unlink'] },
