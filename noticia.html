@@ -83,6 +83,19 @@
             border-radius: 2px;
         }
 
+        #editor-tools {
+            width: 530px;
+            margin-bottom: 8px;
+        }
+
+        #toggle-source-btn {
+            padding: 6px 10px;
+            border: 1px solid #999;
+            background: #f3f3f3;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
         #live-preview {
             outline: none;
             border: 1px solid #ccc;
@@ -94,14 +107,23 @@
             margin-left: 0;
             margin-top: 0;
         }
-        .cke_notifications_area {
-            display:none !important;
+
+        #source-editor {
+            display: none;
+            width: 530px;
+            height: 260px;
+            font-family: monospace;
+            border: 1px solid #ccc;
+            background: #fff;
+            padding: 10px;
+            resize: vertical;
+            box-sizing: border-box;
         }
-        .cke_notification_warning {
-            display:none !important;
-        }
+
+        .cke_notifications_area,
+        .cke_notification_warning,
         .cke_notification {
-            display:none !important;
+            display: none !important;
         }
     </style>
 </head>
@@ -262,9 +284,19 @@
                             <div class="article-body">
                                 <form id="noticia-form">
                                     <br>
-                                    <div id="live-preview" class="center-block" contenteditable="true" lang="pt-br" dir="ltr">
-                                        Escreva aqui...
+
+                                    <div id="editor-tools">
+                                        <button type="button" id="toggle-source-btn">Ver código-fonte</button>
                                     </div>
+
+                                    <div id="live-preview-wrapper">
+                                        <div id="live-preview" class="center-block" contenteditable="true" lang="pt-br" dir="ltr">
+                                            Escreva aqui...
+                                        </div>
+                                    </div>
+
+                                    <textarea id="source-editor"></textarea>
+
                                     <br>
                                 </form>
 
@@ -366,55 +398,85 @@
     </script>
 
     <script src="static/js/form-builder-v3.0.js?1664493856" type="text/javascript"></script>
-
-    <!-- CKEditor novo via CDN -->
     <script src="https://cdn.ckeditor.com/4.22.1/full-all/ckeditor.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    if (typeof CKEDITOR === 'undefined') {
-        console.error('CKEDITOR não foi carregado.');
-        return;
-    }
 
-    var el = document.getElementById('live-preview');
-    if (!el) {
-        console.error('Elemento #live-preview não encontrado.');
-        return;
-    }
-
-    CKEDITOR.disableAutoInline = true;
-
-    try {
-        CKEDITOR.inline('live-preview', {
-            language: 'pt',
-            allowedContent: true,
-            extraAllowedContent: '*[*]{*}(*)',
-            extraPlugins: 'sourcedialog',
-        removePlugins: 'sourcearea,elementspath',
-            toolbar: [
-                { name: 'document', items: ['Source'] },
-                { name: 'clipboard', items: ['Source', 'Undo', 'Redo', '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord'] },
-                { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat'] },
-                { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight'] },
-                { name: 'links', items: ['Link', 'Unlink'] },
-                { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar'] },
-                { name: 'styles', items: ['Format', 'Font', 'FontSize'] },
-                { name: 'colors', items: ['TextColor', 'BGColor'] }
-            ],
-            removeButtons: ''
-        });
-    } catch (e) {
-        console.error('Erro ao iniciar CKEditor:', e);
-    }
-});
-</script>
     <script>
-document.addEventListener('DOMContentLoaded', function () {
-    setTimeout(function () {
-        console.log('sourcedialog:', !!CKEDITOR.plugins.get('sourcedialog'));
-        console.log('sourcearea:', !!CKEDITOR.plugins.get('sourcearea'));
-    }, 500);
-});
-</script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var visual = document.getElementById('live-preview');
+        var visualWrapper = document.getElementById('live-preview-wrapper');
+        var source = document.getElementById('source-editor');
+        var toggleBtn = document.getElementById('toggle-source-btn');
+        var editor = null;
+        var sourceMode = false;
+
+        if (!visual || !visualWrapper || !source || !toggleBtn) {
+            console.error('Elementos do editor não encontrados.');
+            return;
+        }
+
+        if (typeof CKEDITOR === 'undefined') {
+            console.error('CKEDITOR não foi carregado.');
+            return;
+        }
+
+        CKEDITOR.disableAutoInline = true;
+
+        function startEditor() {
+            if (editor) {
+                return;
+            }
+
+            editor = CKEDITOR.inline('live-preview', {
+                language: 'pt',
+                allowedContent: true,
+                extraAllowedContent: '*[*]{*}(*)',
+                removePlugins: 'elementspath',
+                toolbar: [
+                    ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'],
+                    ['Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat'],
+                    ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote'],
+                    ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+                    ['Link', 'Unlink'],
+                    ['Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar'],
+                    ['Format', 'Font', 'FontSize'],
+                    ['TextColor', 'BGColor'],
+                    ['Maximize']
+                ]
+            });
+        }
+
+        function destroyEditor() {
+            if (editor) {
+                editor.destroy();
+                editor = null;
+            }
+        }
+
+        startEditor();
+
+        toggleBtn.addEventListener('click', function () {
+            if (!sourceMode) {
+                if (editor) {
+                    source.value = editor.getData();
+                } else {
+                    source.value = visual.innerHTML;
+                }
+
+                destroyEditor();
+                visualWrapper.style.display = 'none';
+                source.style.display = 'block';
+                toggleBtn.textContent = 'Voltar ao editor';
+                sourceMode = true;
+            } else {
+                visual.innerHTML = source.value;
+                source.style.display = 'none';
+                visualWrapper.style.display = 'block';
+                toggleBtn.textContent = 'Ver código-fonte';
+                sourceMode = false;
+                startEditor();
+            }
+        });
+    });
+    </script>
 </body>
 </html>
